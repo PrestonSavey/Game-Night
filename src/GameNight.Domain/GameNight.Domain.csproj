@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The domain has NO dependencies. Not ASP.NET, not SignalR, not a database,
+    not even a clock. If you ever feel the need to add a PackageReference here,
+    that is the signal that the logic belongs one layer up instead.
+  -->
+  <PropertyGroup>
+    <RootNamespace>GameNight.Domain</RootNamespace>
+  </PropertyGroup>
+
+</Project>

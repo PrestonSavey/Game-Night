@@ -1,0 +1,31 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+artifacts/
+
+# Node
+node_modules/
+dist/
+.vite/
+*.local
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+appsettings.Development.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local build loop
+build-log.txt
+web-log.txt
+api-log.txt
+typecheck-log.txt
+domain-log.txt
+build-request.txt
