@@ -4,6 +4,7 @@ import { Room } from "../screens/Room";
 import { PassDevice } from "../screens/PassDevice";
 import { GameBoard } from "../games/GameBoard";
 import type {
+  BluffView,
   GameModeSummary,
   GameView,
   ImpostorView,
@@ -57,6 +58,25 @@ const MODES: GameModeSummary[] = [
     },
   },
   {
+    id: "bluff",
+    name: "Bluff",
+    tagline: "Invent an answer. Spot the real one. Being believed is worth more.",
+    minPlayers: 3,
+    maxPlayers: 12,
+    privateTurns: true,
+    setting: {
+      label: "Questions",
+      default: 5,
+      defaultToPlayerCount: false,
+      options: [
+        { value: 3, label: "3 questions" },
+        { value: 5, label: "5 questions" },
+        { value: 7, label: "7 questions" },
+        { value: 10, label: "10 questions" },
+      ],
+    },
+  },
+  {
     id: "impostor",
     name: "Impostor",
     tagline: "Everyone knows the word. One of you is bluffing.",
@@ -74,6 +94,39 @@ const MODES: GameModeSummary[] = [
       ],
     },
   },
+];
+
+const BLUFF: BluffView = {
+  modeId: "bluff",
+  yourTurn: true,
+  openToAll: false,
+  phase: "Writing",
+  isYourTurn: true,
+  questionNumber: 2,
+  totalQuestions: 5,
+  prompt: "A group of flamingos is called a ___.",
+  yourLie: null,
+  submitted: 1,
+  playerCount: 4,
+  options: [],
+  yourVote: null,
+  votesCast: 0,
+  answer: null,
+  scores: [
+    { playerId: "p2", displayName: "Ava", score: 5 },
+    { playerId: "p1", displayName: "Preston", score: 3 },
+    { playerId: "p3", displayName: "Ben", score: 2 },
+    { playerId: "p4", displayName: "Cara", score: 0 },
+  ],
+  rejection: null,
+  knewItNames: [],
+};
+
+const BLUFF_OPTIONS = [
+  { key: "o0", text: "a flamboyance", isYours: false, isTruth: null, authorNames: [], voterNames: [] },
+  { key: "o1", text: "a stand", isYours: true, isTruth: null, authorNames: [], voterNames: [] },
+  { key: "o2", text: "a pinkery", isYours: false, isTruth: null, authorNames: [], voterNames: [] },
+  { key: "o3", text: "a flush", isYours: false, isTruth: null, authorNames: [], voterNames: [] },
 ];
 
 const LOBBY: LobbyView = {
@@ -239,6 +292,23 @@ const BOARDS: Record<string, GameView> = {
     secretWord: null,
     yourTurn: true,
     isYourTurn: true,
+  },
+  "Bluff · write": BLUFF,
+  "Bluff · vote": { ...BLUFF, phase: "Voting", options: BLUFF_OPTIONS, submitted: 4 },
+  "Bluff · reveal": {
+    ...BLUFF,
+    phase: "Reveal",
+    openToAll: true,
+    yourTurn: false,
+    isYourTurn: false,
+    answer: "a flamboyance",
+    options: [
+      { ...BLUFF_OPTIONS[0], isTruth: true, authorNames: [], voterNames: ["Preston"] },
+      { ...BLUFF_OPTIONS[1], isTruth: false, authorNames: ["Preston"], voterNames: ["Ava", "Ben"] },
+      { ...BLUFF_OPTIONS[2], isTruth: false, authorNames: ["Cara"], voterNames: [] },
+      { ...BLUFF_OPTIONS[3], isTruth: false, authorNames: ["Ava"], voterNames: ["Cara"] },
+    ],
+    knewItNames: ["Ben"],
   },
   "Impostor · over": {
     ...IMPOSTOR,

@@ -31,4 +31,10 @@ internal static class TestGame
 
     public static GameEvent.Action GuessWord(Player player, string word) =>
         new(player.Id, Payload(new { type = "guess", word }));
+
+    public static GameEvent.Action Lie(Player player, string text) =>
+        new(player.Id, Payload(new { type = "lie", text }));
+
+    public static GameEvent.Action PickOption(Player player, string option) =>
+        new(player.Id, Payload(new { type = "vote", option }));
 }

@@ -1,6 +1,7 @@
 import { SpectrumBoard } from "./spectrum/SpectrumBoard";
 import { LastWordBoard } from "./lastword/LastWordBoard";
 import { ImpostorBoard } from "./impostor/ImpostorBoard";
+import { BluffBoard } from "./bluff/BluffBoard";
 import type { GameView } from "../net/contracts";
 
 /**
@@ -21,6 +22,8 @@ export function GameBoard({
       return <LastWordBoard view={view} onAction={onAction} />;
     case "impostor":
       return <ImpostorBoard view={view} onAction={onAction} />;
+    case "bluff":
+      return <BluffBoard view={view} onAction={onAction} />;
     default:
       return <p className="muted">This client does not know that game yet.</p>;
   }

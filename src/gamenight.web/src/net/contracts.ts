@@ -158,8 +158,45 @@ export interface ImpostorView extends ViewBase {
   outcome: string | null;
 }
 
+export interface BluffOptionView {
+  key: string;
+  text: string;
+  /** You wrote this one. Told to you and to nobody else. */
+  isYours: boolean;
+  /** Null until the reveal, for everybody. */
+  isTruth: boolean | null;
+  authorNames: string[];
+  voterNames: string[];
+}
+
+export interface BluffScoreView {
+  playerId: string;
+  displayName: string;
+  score: number;
+}
+
+export interface BluffView extends ViewBase {
+  modeId: "bluff";
+  phase: "Writing" | "Voting" | "Reveal" | "Finished";
+  isYourTurn: boolean;
+  questionNumber: number;
+  totalQuestions: number;
+  prompt: string;
+  yourLie: string | null;
+  submitted: number;
+  playerCount: number;
+  options: BluffOptionView[];
+  yourVote: string | null;
+  votesCast: number;
+  /** Null until the reveal. The field the whole game protects. */
+  answer: string | null;
+  scores: BluffScoreView[];
+  rejection: string | null;
+  knewItNames: string[];
+}
+
 /** Discriminated on modeId, so the client picks a board the same way the server picks a mode. */
-export type GameView = SpectrumView | LastWordView | ImpostorView;
+export type GameView = SpectrumView | LastWordView | ImpostorView | BluffView;
 
 export interface JoinResponse {
   success: boolean;

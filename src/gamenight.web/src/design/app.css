@@ -586,3 +586,53 @@ button { font: inherit; color: inherit; }
 .player--impostor { border-color: var(--hot); }
 .player--impostor .player__dot { background: var(--hot); }
 .player--impostor .player__tag { color: var(--hot); }
+
+/* ------------------------------------------------------------------ bluff */
+
+.prompt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--size-lg);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.prompt__answer { margin: var(--s3) 0 0; color: var(--cold); font-size: var(--size-md); }
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  width: 100%;
+  text-align: left;
+  padding: var(--s3) var(--s4);
+  min-height: 56px;
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--r-md);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color var(--snap), background var(--snap);
+}
+.option:hover:not(:disabled) { border-color: var(--signal); background: var(--surface-2); }
+.option:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+.option:disabled { cursor: not-allowed; }
+.option--picked { border-color: var(--cold); background: var(--cold-dim); }
+.option--static { cursor: default; flex-direction: column; align-items: flex-start; gap: var(--s1); }
+.option--truth { border-color: var(--cold); background: var(--cold-dim); }
+
+.option__text { font-weight: 600; overflow-wrap: anywhere; }
+
+.option__tag {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--size-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.option__meta { font-size: var(--size-sm); color: var(--text-2); }

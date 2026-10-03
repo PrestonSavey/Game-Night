@@ -4,6 +4,7 @@ using GameNight.Application.Security;
 using GameNight.Application.Sessions;
 using GameNight.Application.Words;
 using GameNight.Domain.Abstractions;
+using GameNight.Domain.Games.Bluff;
 using GameNight.Domain.Games.Impostor;
 using GameNight.Domain.Games.LastWord;
 using GameNight.Domain.Games.Spectrum;
@@ -26,6 +27,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IGameMode, SpectrumGameMode>();
         services.AddSingleton<IGameMode, LastWordGameMode>();
         services.AddSingleton<IGameMode, ImpostorGameMode>();
+        services.AddSingleton<IGameMode, BluffGameMode>();
 
         services.AddSingleton<IGameModeRegistry, GameModeRegistry>();
         services.AddSingleton<ILobbyCodeGenerator, LobbyCodeGenerator>();
